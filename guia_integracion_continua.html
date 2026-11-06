@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politécnico Grancolombiano. Equipo 1. Segundo Semestre 2026 | Integración Continua</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Roboto', 'sans-serif'],
+          },
+          colors: {
+            brandDark: '#080d1a',
+            brandNavy: '#001f54',
+            brandNavyLight: '#034078',
+            brandCyan: '#1282a2',
+            brandAccent: '#38bdf8',
+            surfaceDark: '#0f172a',
+            cardBg: '#0f2042',
+            cardBorder: '#1e3a6e'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Estilos personalizados para animaciones y tarjetas 3D */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+    /* Scrollbar personalizada con tonos marinos */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #080d1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #034078;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #1282a2;
+    }
+  </style>
+</head>
+<body class="bg-brandDark text-gray-200 font-sans min-h-screen flex flex-col selection:bg-brandCyan selection:text-white">
+
+  <!-- ==================== HEADER INSTITUCIONAL ==================== -->
+  <header class="sticky top-0 z-50 bg-[#001f54]/95 backdrop-blur-md border-b border-cardBorder shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Identidad Institucional -->
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-brandAccent animate-pulse"></span>
+            <span class="text-xs uppercase tracking-widest font-bold text-brandAccent">Énfasis Profesional I</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-bold text-white tracking-tight">
+            Politécnico Grancolombiano. <span class="text-brandAccent">Equipo 1. Segundo Semestre 2026.</span>
+          </h1>
+          <p class="text-xs text-blue-200 hidden sm:block">
+            Integración Continua | Guía Integral de Estudio
+          </p>
+        </div>
+
+        <!-- Menú de navegación en escritorio -->
+        <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2 text-xs xl:text-sm font-medium text-gray-300">
+          <a href="#fundamentos" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-brandNavyLight/50 transition">Fundamentos</a>
+          <a href="#arquitectura" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-brandNavyLight/50 transition">Arquitectura</a>
+          <a href="#herramientas" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-brandNavyLight/50 transition">Herramientas</a>
+          <a href="#instalacion" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-brandNavyLight/50 transition">Instalación</a>
+          <a href="#entregas" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-brandNavyLight/50 transition">Entregas</a>
+          <a href="#flashcards" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-brandNavyLight/50 transition">Flashcards</a>
+          <a href="#quiz" class="px-3 py-1.5 rounded-lg bg-brandCyan hover:bg-brandAccent text-white font-semibold transition shadow-md">Quiz</a>
+        </nav>
+
+        <!-- Botón menú móvil -->
+        <div class="lg:hidden">
+          <button id="mobileMenuBtn" aria-label="Abrir menú" class="p-2 rounded-lg bg-cardBg border border-cardBorder text-gray-300 hover:text-white focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Menú desplegable móvil -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-brandNavy border-b border-cardBorder px-4 pt-2 pb-4 space-y-2 text-sm">
+      <a href="#fundamentos" class="block px-3 py-2 rounded-lg hover:bg-brandNavyLight text-gray-200">Fundamentos</a>
+      <a href="#arquitectura" class="block px-3 py-2 rounded-lg hover:bg-brandNavyLight text-gray-200">Arquitectura</a>
+      <a href="#herramientas" class="block px-3 py-2 rounded-lg hover:bg-brandNavyLight text-gray-200">Herramientas</a>
+      <a href="#instalacion" class="block px-3 py-2 rounded-lg hover:bg-brandNavyLight text-gray-200">Instalación</a>
+      <a href="#entregas" class="block px-3 py-2 rounded-lg hover:bg-brandNavyLight text-gray-200">Entregas</a>
+      <a href="#flashcards" class="block px-3 py-2 rounded-lg hover:bg-brandNavyLight text-gray-200">Flashcards</a>
+      <a href="#quiz" class="block px-3 py-2 rounded-lg bg-brandCyan text-white font-bold text-center">Quiz Interactivo</a>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="relative bg-gradient-to-b from-[#001f54] via-brandDark to-brandDark py-12 md:py-16 border-b border-cardBorder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brandNavyLight/40 border border-brandCyan/40 text-xs font-semibold text-brandAccent">
+        Facultad de Ingeniería, Diseño e Innovación
+      </div>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
+        Plataforma Interactiva de Integración Continua
+      </h2>
+      <p class="max-w-3xl mx-auto text-base sm:text-lg text-blue-200 font-light leading-relaxed">
+        Domina los principios del paradigma ágil formulado por Martin Fowler, la orquestación de servidores, el ecosistema de herramientas y la preparación para las entregas prácticas del curso.
+      </p>
+
+      <!-- Métricas del módulo -->
+      <div class="pt-6 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="bg-cardBg/80 p-4 rounded-xl border border-cardBorder text-center">
+          <div class="text-2xl font-black text-brandAccent">07</div>
+          <div class="text-xs text-blue-200 font-medium">Herramientas Clave</div>
+        </div>
+        <div class="bg-cardBg/80 p-4 rounded-xl border border-cardBorder text-center">
+          <div class="text-2xl font-black text-brandAccent">05</div>
+          <div class="text-xs text-blue-200 font-medium">Tipos de Ramas Git</div>
+        </div>
+        <div class="bg-cardBg/80 p-4 rounded-xl border border-cardBorder text-center">
+          <div class="text-2xl font-black text-brandAccent">15</div>
+          <div class="text-xs text-blue-200 font-medium">Pasos de Instalación</div>
+        </div>
+        <div class="bg-cardBg/80 p-4 rounded-xl border border-cardBorder text-center">
+          <div class="text-2xl font-black text-brandAccent">03</div>
+          <div class="text-xs text-blue-200 font-medium">Hitos de Entrega</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CUERPO PRINCIPAL ==================== -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+    <!-- 1. FUNDAMENTOS DE INTEGRACIÓN CONTINUA -->
+    <section id="fundamentos" class="scroll-mt-24 space-y-8">
+      <div class="flex items-center gap-3 border-b border-cardBorder pb-3">
+        <span class="text-3xl">📚</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          Fundamentos de Integración Continua
+        </h2>
+      </div>
+
+      <!-- Definición Martin Fowler -->
+      <div class="bg-cardBg rounded-2xl p-6 md:p-8 border border-cardBorder shadow-lg relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brandNavyLight/20 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="flex-shrink-0 bg-brandNavyLight p-3.5 rounded-xl border border-brandCyan/40 text-brandAccent">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <div class="space-y-3">
+            <h3 class="text-xl font-bold text-white">El Paradigma Ágil según Martin Fowler (2006)</h3>
+            <blockquote class="italic text-blue-200 text-sm md:text-base border-l-4 border-brandCyan pl-4 py-1 leading-relaxed">
+              "Típicamente cada persona integra al menos una vez al día, generando varias versiones por día. Cada versión ejecutable es verificada por un sistema automático de integración y pruebas para detectar errores de integración lo más rápido posible."
+            </blockquote>
+            <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
+              En el desarrollo tradicional, los equipos trabajaban de forma aislada durante semanas o meses, lo que provocaba el temido <em>"Integration Hell"</em> (infierno de la integración) al final de los ciclos. La Integración Continua (CI) reemplaza este aislamiento mediante integraciones atómicas y retroalimentación constante.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla Comparativa -->
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span>⚖️</span> Comparativa: Enfoque Tradicional vs. Integración Continua
+        </h3>
+        <div class="overflow-x-auto rounded-xl border border-cardBorder shadow-md bg-cardBg">
+          <table class="w-full text-left text-sm text-gray-300">
+            <thead class="bg-brandNavy text-brandAccent uppercase text-xs font-semibold tracking-wider">
+              <tr>
+                <th class="py-3.5 px-4 sm:px-6">Criterio</th>
+                <th class="py-3.5 px-4 sm:px-6 text-red-300">Método Tradicional</th>
+                <th class="py-3.5 px-4 sm:px-6 text-emerald-300">Integración Continua (CI)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-cardBorder">
+              <tr class="hover:bg-brandNavyLight/20 transition">
+                <td class="py-3.5 px-4 sm:px-6 font-medium text-white">Velocidad de Entrega</td>
+                <td class="py-3.5 px-4 sm:px-6 text-red-200">Lenta (entregas semestrales o anuales)</td>
+                <td class="py-3.5 px-4 sm:px-6 text-emerald-200">Ágil (múltiples builds por día)</td>
+              </tr>
+              <tr class="hover:bg-brandNavyLight/20 transition">
+                <td class="py-3.5 px-4 sm:px-6 font-medium text-white">Costos Operativos</td>
+                <td class="py-3.5 px-4 sm:px-6 text-red-200">Elevados por resolución tardía de fallos</td>
+                <td class="py-3.5 px-4 sm:px-6 text-emerald-200">Optimizados mediante automatización</td>
+              </tr>
+              <tr class="hover:bg-brandNavyLight/20 transition">
+                <td class="py-3.5 px-4 sm:px-6 font-medium text-white">Margen de Error</td>
+                <td class="py-3.5 px-4 sm:px-6 text-red-200">Altamente susceptible al error humano</td>
+                <td class="py-3.5 px-4 sm:px-6 text-emerald-200">Minimizado con pruebas y suites de CI</td>
+              </tr>
+              <tr class="hover:bg-brandNavyLight/20 transition">
+                <td class="py-3.5 px-4 sm:px-6 font-medium text-white">Calidad del Software</td>
+                <td class="py-3.5 px-4 sm:px-6 text-red-200">Media / Baja por falta de visibilidad</td>
+                <td class="py-3.5 px-4 sm:px-6 text-emerald-200">Alta y monitoreada constantemente</td>
+              </tr>
+              <tr class="hover:bg-brandNavyLight/20 transition">
+                <td class="py-3.5 px-4 sm:px-6 font-medium text-white">Comunicación y Feedback</td>
+                <td class="py-3.5 px-4 sm:px-6 text-red-200">Reunión sólo al inicio y al final</td>
+                <td class="py-3.5 px-4 sm:px-6 text-emerald-200">Historial público y trazabilidad activa</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Estrategia de Ramas Git -->
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span>🌿</span> Estrategia de Flujo de Ramas (Git Flow)
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div class="bg-cardBg p-4 rounded-xl border border-cardBorder">
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-purple-900/60 text-purple-300 mb-2">Master / Main</span>
+            <p class="text-xs text-gray-300">Código de producción 100% estable, listo para despliegues oficiales a usuarios.</p>
+          </div>
+          <div class="bg-cardBg p-4 rounded-xl border border-cardBorder">
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-blue-900/60 text-blue-300 mb-2">Develop</span>
+            <p class="text-xs text-gray-300">Rama integradora de trabajo activo donde converge el desarrollo antes de estabilizar.</p>
+          </div>
+          <div class="bg-cardBg p-4 rounded-xl border border-cardBorder">
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-amber-900/60 text-amber-300 mb-2">Feature</span>
+            <p class="text-xs text-gray-300">Ramas individuales por cada nueva funcionalidad o tarea asignada al desarrollador.</p>
+          </div>
+          <div class="bg-cardBg p-4 rounded-xl border border-cardBorder">
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-cyan-900/60 text-cyan-300 mb-2">Release</span>
+            <p class="text-xs text-gray-300">Fase de congelamiento para pulir y realizar pruebas de versión antes de liberar.</p>
+          </div>
+          <div class="bg-cardBg p-4 rounded-xl border border-cardBorder">
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-rose-900/60 text-rose-300 mb-2">Hotfix</span>
+            <p class="text-xs text-gray-300">Parches críticos e inmediatos que surgen directamente sobre el ambiente de producción.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ARQUITECTURA DE SERVIDORES CI -->
+    <section id="arquitectura" class="scroll-mt-24 space-y-8">
+      <div class="flex items-center gap-3 border-b border-cardBorder pb-3">
+        <span class="text-3xl">🏛️</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          Arquitectura de Servidores CI
+        </h2>
+      </div>
+
+      <p class="text-sm md:text-base text-gray-300">
+        Haz clic sobre cualquiera de los nodos del diagrama para inspeccionar su función técnica y responsabilidad dentro del ecosistema de Integración Continua (según la Figura 1 de la lectura oficial).
+      </p>
+
+      <!-- Diagrama Interactivo de Servidores -->
+      <div class="bg-cardBg p-6 sm:p-8 rounded-2xl border border-cardBorder shadow-xl space-y-6">
+        
+        <!-- Nodos en Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          
+          <!-- Nodo 1 -->
+          <button onclick="inspectNode('dev')" class="node-btn p-4 rounded-xl border-2 border-brandNavyLight bg-brandNavy hover:border-brandAccent transition text-left focus:outline-none cursor-pointer flex flex-col justify-between h-36">
+            <div>
+              <div class="text-2xl mb-1">💻</div>
+              <h4 class="font-bold text-white text-sm">Entorno Local</h4>
+            </div>
+            <span class="text-[11px] text-brandAccent font-mono">Workspace Dev</span>
+          </button>
+
+          <!-- Nodo 2 -->
+          <button onclick="inspectNode('repo')" class="node-btn p-4 rounded-xl border-2 border-brandNavyLight bg-brandNavy hover:border-brandAccent transition text-left focus:outline-none cursor-pointer flex flex-col justify-between h-36">
+            <div>
+              <div class="text-2xl mb-1">📦</div>
+              <h4 class="font-bold text-white text-sm">Repositorio Central</h4>
+            </div>
+            <span class="text-[11px] text-brandAccent font-mono">Git / GitHub VCS</span>
+          </button>
+
+          <!-- Nodo 3 (Destacado CI) -->
+          <button onclick="inspectNode('ci')" class="node-btn p-4 rounded-xl border-2 border-brandCyan bg-gradient-to-b from-brandNavyLight to-brandNavy hover:border-brandAccent transition text-left focus:outline-none cursor-pointer flex flex-col justify-between h-36 shadow-lg shadow-brandCyan/20">
+            <div>
+              <div class="text-2xl mb-1">🔄</div>
+              <h4 class="font-bold text-white text-sm">Servidor de CI</h4>
+            </div>
+            <span class="text-[11px] text-white font-mono bg-brandCyan px-1.5 py-0.5 rounded">Core Jenkins/Travis</span>
+          </button>
+
+          <!-- Nodo 4 -->
+          <button onclick="inspectNode('test')" class="node-btn p-4 rounded-xl border-2 border-brandNavyLight bg-brandNavy hover:border-brandAccent transition text-left focus:outline-none cursor-pointer flex flex-col justify-between h-36">
+            <div>
+              <div class="text-2xl mb-1">🧪</div>
+              <h4 class="font-bold text-white text-sm">Servidor de Pruebas</h4>
+            </div>
+            <span class="text-[11px] text-brandAccent font-mono">Docker Containers</span>
+          </button>
+
+          <!-- Nodo 5 -->
+          <button onclick="inspectNode('prod')" class="node-btn p-4 rounded-xl border-2 border-brandNavyLight bg-brandNavy hover:border-brandAccent transition text-left focus:outline-none cursor-pointer flex flex-col justify-between h-36">
+            <div>
+              <div class="text-2xl mb-1">🚀</div>
+              <h4 class="font-bold text-white text-sm">Staging / Producción</h4>
+            </div>
+            <span class="text-[11px] text-brandAccent font-mono">Deploy Host</span>
+          </button>
+
+        </div>
+
+        <!-- Panel de Inspección Dinámico -->
+        <div id="inspectorPanel" class="bg-brandDark/80 p-5 rounded-xl border border-cardBorder min-h-[120px] flex items-center">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-brandAccent"></span>
+              <h4 id="inspectTitle" class="text-base font-bold text-white">Servidor de Integración Continua (Core)</h4>
+            </div>
+            <p id="inspectDesc" class="text-xs md:text-sm text-gray-300 leading-relaxed">
+              Es el cerebro orquestador del sistema (ej. Jenkins o Travis CI). Escucha los Webhooks del repositorio central tras cada Push o Pull Request, clona el código, dispara los pipelines de compilación, invoca el análisis estático y ejecuta las pruebas automatizadas.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Diferencia Técnica: VMs vs Contenedores -->
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span>🐳</span> Máquinas Virtuales (VM) vs. Contenedores Docker
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-cardBg p-6 rounded-xl border border-cardBorder space-y-3">
+            <h4 class="text-base font-bold text-white flex items-center gap-2">
+              <span>🖥️</span> Máquina Virtual (Hipervisor)
+            </h4>
+            <ul class="text-xs sm:text-sm text-gray-300 space-y-2 list-disc list-inside">
+              <li>Incluye un Sistema Operativo invitado (Guest OS) completo con kernel propio.</li>
+              <li>Consumo intensivo de recursos de CPU, memoria RAM y almacenamiento.</li>
+              <li>Arranque lento que tarda varios minutos.</li>
+              <li>Aislamiento estricto a nivel de hardware virtualizado.</li>
+            </ul>
+          </div>
+          <div class="bg-cardBg p-6 rounded-xl border border-brandCyan/40 space-y-3">
+            <h4 class="text-base font-bold text-brandAccent flex items-center gap-2">
+              <span>📦</span> Contenedores Docker
+            </h4>
+            <ul class="text-xs sm:text-sm text-gray-300 space-y-2 list-disc list-inside">
+              <li>Comparten el Kernel del Sistema Operativo anfitrión (Host OS).</li>
+              <li>Ligereza extrema: imágenes de pocos megabytes y consumo mínimo de RAM.</li>
+              <li>Arranque instantáneo en cuestión de milisegundos.</li>
+              <li>Garantiza paridad total entre desarrollo, pruebas y producción.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ECOSISTEMA DE HERRAMIENTAS -->
+    <section id="herramientas" class="scroll-mt-24 space-y-8">
+      <div class="flex items-center gap-3 border-b border-cardBorder pb-3">
+        <span class="text-3xl">🛠️</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          Ecosistema de Herramientas
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- GitHub & Marketplace -->
+        <div class="bg-cardBg p-6 rounded-2xl border border-cardBorder hover:border-brandAccent transition flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-white">GitHub & Marketplace</h3>
+              <span class="text-xs bg-brandNavyLight px-2.5 py-1 rounded-full text-brandAccent font-mono">VCS / Colaboración</span>
+            </div>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Plataforma central basada en Git para control de versiones, Pull Requests, revisiones de pares y gestión de incidencias. Su Marketplace permite integrar bots, linters y servicios de CI/CD en un clic.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-cardBorder text-[11px] text-blue-200">
+            Rol en el curso: Alojamiento del proyecto y disparador de eventos vía webhooks.
+          </div>
+        </div>
+
+        <!-- Travis CI -->
+        <div class="bg-cardBg p-6 rounded-2xl border border-cardBorder hover:border-brandAccent transition flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-white">Travis CI</h3>
+              <span class="text-xs bg-brandNavyLight px-2.5 py-1 rounded-full text-brandAccent font-mono">SaaS CI</span>
+            </div>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Servicio de integración continua en la nube sincronizado de forma nativa con GitHub. Automatiza la compilación y prueba de aplicaciones mediante la configuración de directivas en el archivo <code class="text-brandAccent bg-brandDark px-1 rounded">.travis.yml</code>.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-cardBorder text-[11px] text-blue-200">
+            Rol en el curso: Pipeline automatizado de validación con cada commit.
+          </div>
+        </div>
+
+        <!-- Jenkins -->
+        <div class="bg-cardBg p-6 rounded-2xl border border-cardBorder hover:border-brandAccent transition flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-white">Jenkins</h3>
+              <span class="text-xs bg-brandNavyLight px-2.5 py-1 rounded-full text-brandAccent font-mono">Self-Hosted CI</span>
+            </div>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Servidor de automatización Open Source líder en la industria. Permite definir pipelines mediante <code class="text-brandAccent bg-brandDark px-1 rounded">Jenkinsfile</code> y extender sus capacidades con miles de plugins para cualquier lenguaje y nube.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-cardBorder text-[11px] text-blue-200">
+            Rol en el curso: Comprensión de arquitecturas de servidor CI locales y empresariales.
+          </div>
+        </div>
+
+        <!-- Docker -->
+        <div class="bg-cardBg p-6 rounded-2xl border border-cardBorder hover:border-brandAccent transition flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-white">Docker</h3>
+              <span class="text-xs bg-brandNavyLight px-2.5 py-1 rounded-full text-brandAccent font-mono">Contenedores</span>
+            </div>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Herramienta de contenedores que empaqueta una aplicación y todas sus dependencias exactas en un contenedor estandarizado, asegurando que el software se ejecute sin discrepancias en cualquier servidor.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-cardBorder text-[11px] text-blue-200">
+            Rol en el curso: Entornos reproducibles y aislamiento de pruebas en CI.
+          </div>
+        </div>
+
+        <!-- Zenhub -->
+        <div class="bg-cardBg p-6 rounded-2xl border border-brandCyan/40 hover:border-brandAccent transition flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-brandAccent">Zenhub</h3>
+              <span class="text-xs bg-brandNavyLight px-2.5 py-1 rounded-full text-brandAccent font-mono">Gestión Ágil</span>
+            </div>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Herramienta de gestión de proyectos ágiles integrada nativamente dentro de la interfaz de GitHub. Proporciona tableros Kanban, epics, estimaciones de historia y métricas de velocidad sin salir de los repositorios.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-cardBorder text-[11px] text-blue-200">
+            Rol en el curso: Trazabilidad ágil de tareas grupales y sprints.
+          </div>
+        </div>
+
+        <!-- Sentry -->
+        <div class="bg-cardBg p-6 rounded-2xl border border-brandCyan/40 hover:border-brandAccent transition flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-brandAccent">Sentry</h3>
+              <span class="text-xs bg-brandNavyLight px-2.5 py-1 rounded-full text-brandAccent font-mono">Monitoreo / APM</span>
+            </div>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Plataforma para el monitoreo de fallos y rendimiento en tiempo real. Rastrea excepciones no controladas, muestra el stack trace detallado del código afectado y envía alertas inmediatas a los desarrolladores.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-cardBorder text-[11px] text-blue-200">
+            Rol en el curso: Monitoreo proactivo en entornos de prueba y producción.
+          </div>
+        </div>
+
+        <!-- Codecov -->
+        <div class="bg-cardBg p-6 rounded-2xl border border-cardBorder hover:border-brandAccent transition flex flex-col justify-between md:col-span-2 lg:col-span-3">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-white">Codecov (Code Coverage)</h3>
+              <span class="text-xs bg-brandNavyLight px-2.5 py-1 rounded-full text-brandAccent font-mono">Calidad de Código</span>
+            </div>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Herramienta de métricas que se conecta a los pipelines de CI para medir y auditar el porcentaje de código cubierto por pruebas automatizadas, bloqueando Pull Requests que disminuyan la cobertura del proyecto.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-cardBorder text-[11px] text-blue-200">
+            Rol en el curso: Aseguramiento de calidad y umbrales mínimos de testing.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. GUÍA DE INSTALACIÓN GITHUB DESKTOP -->
+    <section id="instalacion" class="scroll-mt-24 space-y-8">
+      <div class="flex items-center gap-3 border-b border-cardBorder pb-3">
+        <span class="text-3xl">💻</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          Guía de Instalación GitHub Desktop
+        </h2>
+      </div>
+
+      <div class="bg-cardBg rounded-2xl p-6 md:p-8 border border-cardBorder shadow-lg space-y-6">
+        <p class="text-sm text-blue-200">
+          A continuación se presenta el procedimiento paso a paso para la descarga, instalación y configuración del cliente GitHub Desktop según la documentación oficial de la asignatura:
+        </p>
+
+        <!-- Lista de 15 pasos en texto plano y directo sin emojis -->
+        <ol class="space-y-3 text-sm md:text-base text-gray-200 counter-reset-step">
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">1.</span>
+            <span>Ubicar en Google "github desktop"</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">2.</span>
+            <span>Seleccionar la opción de descarga para Windows</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">3.</span>
+            <span>Validar la descarga en la carpeta del equipo</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">4.</span>
+            <span>Realizar el proceso de instalación</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">5.</span>
+            <span>Seleccionar la opción de "Sign in to GitHub.com"</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">6.</span>
+            <span>Crear una cuenta de usuario si no la tenemos</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">7.</span>
+            <span>En la instalación autorizar Desktop</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">8.</span>
+            <span>Ya podemos ingresar</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">9.</span>
+            <span>Creamos un nuevo repositorio local</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">10.</span>
+            <span>Se toma una carpeta que tenga uno en el computador y que quiera compartir</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">11.</span>
+            <span>Se escribe el mismo nombre de la carpeta que se quiere compartir</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">12.</span>
+            <span>Se crea el proyecto seleccionando la opción "initialize this repository with a README"; esto permite crear automáticamente un archivo README para documentar el proyecto</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">13.</span>
+            <span>Se publica el repositorio</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">14.</span>
+            <span>Se visualizan los proyectos creados en la plataforma</span>
+          </li>
+          <li class="flex items-start gap-3 bg-brandDark/50 p-3 rounded-xl border border-cardBorder">
+            <span class="font-bold text-brandAccent font-mono min-w-[24px]">15.</span>
+            <span>Entre las opciones en GitHub encontramos: "Open in Visual Studio Code" para abrir el proyecto y editar el código, "Show in Explorer" para abrir la carpeta del proyecto en el explorador de archivos de Windows, y "View on GitHub" para abrir el repositorio en la página web en línea</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. ENTREGAS DEL PROYECTO GRUPAL -->
+    <section id="entregas" class="scroll-mt-24 space-y-8">
+      <div class="flex items-center gap-3 border-b border-cardBorder pb-3">
+        <span class="text-3xl">📦</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          Entregas del Proyecto Grupal
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Entrega 1 -->
+        <div class="bg-cardBg p-6 rounded-2xl border border-cardBorder flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-brandNavyLight text-brandAccent font-mono">Semana 3</span>
+              <span class="text-xs text-gray-400">Entrega 1</span>
+            </div>
+            <h3 class="text-lg font-bold text-white">Configuración del Entorno y Repositorio</h3>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Creación del repositorio público central en GitHub, vinculación del equipo de trabajo, establecimiento de directivas <code class="text-brandAccent">README.md</code>, estructura base del software y tableros de control en Zenhub.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-cardBorder text-xs text-brandAccent font-semibold">
+            Objetivo: Repositorio base y asignación inicial.
+          </div>
+        </div>
+
+        <!-- Entrega 2 -->
+        <div class="bg-cardBg p-6 rounded-2xl border border-brandCyan/40 flex flex-col justify-between shadow-lg">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-brandCyan text-white font-mono">Semana 5</span>
+              <span class="text-xs text-brandAccent font-bold">Entrega 2</span>
+            </div>
+            <h3 class="text-lg font-bold text-white">Pipeline de CI y Pruebas Unitarias</h3>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Integración de Travis CI o Jenkins con el repositorio. Ejecución automatizada de pruebas unitarias con cada Pull Request, reporte de métricas de cobertura y empaquetamiento en contenedores Docker.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-cardBorder text-xs text-brandAccent font-semibold">
+            Objetivo: Automatización de builds y testing.
+          </div>
+        </div>
+
+        <!-- Entrega 3 -->
+        <div class="bg-cardBg p-6 rounded-2xl border border-cardBorder flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-brandNavyLight text-brandAccent font-mono">Semanas 7 y 8</span>
+              <span class="text-xs text-gray-400">Entrega 3</span>
+            </div>
+            <h3 class="text-lg font-bold text-white">Despliegue Continuo, Monitoreo y Sustentación</h3>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Despliegue automatizado en servidor staging/producción, integración del monitoreo de errores con Sentry, entrega de informe final y sustentación técnica del flujo grupal de trabajo.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-cardBorder text-xs text-brandAccent font-semibold">
+            Objetivo: Ciclo CI/CD completo y defensa.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. FLASHCARDS DE ESTUDIO INTERACTIVAS -->
+    <section id="flashcards" class="scroll-mt-24 space-y-8">
+      <div class="flex items-center gap-3 border-b border-cardBorder pb-3">
+        <span class="text-3xl">🗂️</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          Flashcards de Estudio Interactivas
+        </h2>
+      </div>
+
+      <p class="text-sm text-blue-200">
+        Haz clic sobre la tarjeta para voltearla y revisar la respuesta. Utiliza los controles para navegar entre los conceptos clave del examen.
+      </p>
+
+      <!-- Contenedor Flashcard -->
+      <div class="max-w-xl mx-auto space-y-6">
+        
+        <div class="w-full h-72 perspective-1000 cursor-pointer" onclick="toggleFlashcard()">
+          <div id="flashcardInner" class="relative w-full h-full transform-style-3d transition-transform duration-500 shadow-2xl rounded-2xl">
+            
+            <!-- Cara Frontal (Pregunta) -->
+            <div class="absolute inset-0 bg-cardBg border-2 border-brandNavyLight rounded-2xl p-8 flex flex-col justify-between backface-hidden">
+              <div class="flex justify-between items-center text-xs text-brandAccent font-mono">
+                <span id="fcCategory">CONCEPTO FUNDAMENTAL</span>
+                <span id="fcCounter">1 / 5</span>
+              </div>
+              <div class="text-center my-auto">
+                <p id="fcQuestion" class="text-lg sm:text-xl font-bold text-white leading-snug">
+                  ¿Qué define Martin Fowler como la frecuencia ideal de integración en CI?
+                </p>
+              </div>
+              <div class="text-center text-xs text-gray-400">
+                Toca la tarjeta para ver la respuesta ↺
+              </div>
+            </div>
+
+            <!-- Cara Posterior (Respuesta) -->
+            <div class="absolute inset-0 bg-gradient-to-br from-brandNavyLight to-cardBg border-2 border-brandAccent rounded-2xl p-8 flex flex-col justify-between backface-hidden rotate-y-180">
+              <div class="flex justify-between items-center text-xs text-brandAccent font-mono">
+                <span>RESPUESTA TÉCNICA</span>
+                <span>VOLTEAR ↺</span>
+              </div>
+              <div class="text-center my-auto">
+                <p id="fcAnswer" class="text-base sm:text-lg text-white font-medium leading-relaxed">
+                  Cada desarrollador debe integrar su trabajo al menos una vez al día en la rama principal, lo que genera múltiples versiones verificadas automáticamente con pruebas.
+                </p>
+              </div>
+              <div class="text-center text-xs text-blue-200">
+                Toca de nuevo para volver a la pregunta
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Controles de Navegación de Flashcards -->
+        <div class="flex items-center justify-between px-4">
+          <button onclick="prevFlashcard()" class="px-4 py-2 rounded-xl bg-cardBg hover:bg-brandNavyLight border border-cardBorder text-sm font-semibold text-white transition flex items-center gap-2">
+            ← Anterior
+          </button>
+          <span class="text-xs text-gray-400 font-mono">Presiona para girar o navegar</span>
+          <button onclick="nextFlashcard()" class="px-4 py-2 rounded-xl bg-cardBg hover:bg-brandNavyLight border border-cardBorder text-sm font-semibold text-white transition flex items-center gap-2">
+            Siguiente →
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. QUIZ DE AUTOEVALUACIÓN -->
+    <section id="quiz" class="scroll-mt-24 space-y-8">
+      <div class="flex items-center gap-3 border-b border-cardBorder pb-3">
+        <span class="text-3xl">📝</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          Quiz de Autoevaluación
+        </h2>
+      </div>
+
+      <div class="bg-cardBg rounded-2xl p-6 md:p-8 border border-cardBorder shadow-xl space-y-6 max-w-3xl mx-auto">
+        
+        <!-- Header del Quiz -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-cardBorder pb-4 gap-2">
+          <div>
+            <span class="text-xs text-brandAccent font-mono uppercase tracking-wider">Test de Conocimientos</span>
+            <h3 id="quizTitle" class="text-lg font-bold text-white">Pregunta 1 de 5</h3>
+          </div>
+          <div class="bg-brandDark px-4 py-1.5 rounded-full border border-cardBorder text-sm font-mono text-brandAccent">
+            Puntuación: <span id="quizScore">0</span> / 5
+          </div>
+        </div>
+
+        <!-- Contenedor de Pregunta -->
+        <div class="space-y-4">
+          <p id="quizQuestion" class="text-base sm:text-lg font-medium text-white leading-relaxed">
+            Cargando pregunta...
+          </p>
+
+          <!-- Opciones de Respuesta -->
+          <div id="quizOptions" class="space-y-3">
+            <!-- Renderizado dinámicamente con JS -->
+          </div>
+        </div>
+
+        <!-- Feedback Explicativo -->
+        <div id="quizFeedback" class="hidden p-4 rounded-xl text-sm leading-relaxed border transition">
+          <!-- Texto de explicación dinámico -->
+        </div>
+
+        <!-- Botón Siguiente -->
+        <div class="flex justify-end pt-2">
+          <button id="quizNextBtn" onclick="nextQuestion()" class="hidden px-6 py-2.5 rounded-xl bg-brandCyan hover:bg-brandAccent text-white font-bold text-sm transition shadow-md">
+            Siguiente Pregunta →
+          </button>
+          <button id="quizRestartBtn" onclick="restartQuiz()" class="hidden px-6 py-2.5 rounded-xl bg-brandNavyLight hover:bg-brandCyan text-white font-bold text-sm transition">
+            Reiniciar Quiz ↺
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. REFERENCIAS ACADÉMICAS -->
+    <section id="referencias" class="scroll-mt-24 space-y-6">
+      <div class="flex items-center gap-3 border-b border-cardBorder pb-3">
+        <span class="text-3xl">📖</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          Referencias Académicas
+        </h2>
+      </div>
+
+      <div class="bg-cardBg p-6 rounded-2xl border border-cardBorder text-xs sm:text-sm text-gray-300 space-y-3 leading-relaxed">
+        <p>
+          • <strong>Fowler, M. (2006).</strong> <em>Continuous Integration</em>. MartinFowler.com. Recuperado de: <a href="https://martinfowler.com/articles/continuousIntegration.html" target="_blank" rel="noopener noreferrer" class="text-brandAccent hover:underline">https://martinfowler.com/articles/continuousIntegration.html</a>
+        </p>
+        <p>
+          • <strong>Oliveros Acosta, E. E. (2017).</strong> <em>Fundamentos de la Integración Continua</em>. Módulo Énfasis Profesional I, Unidad 1 / Escenario 1. Politécnico Grancolombiano.
+        </p>
+        <p>
+          • <strong>GeneXus Community Wiki. (2016).</strong> <em>Continuous Integration Best Practices and Tooling</em>.
+        </p>
+        <p>
+          • <strong>Politécnico Grancolombiano. (2026).</strong> <em>Guía de Proyecto Grupal: Proyecto de software basado en herramientas de integración continua</em>. Facultad de Ingeniería, Diseño e Innovación.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-brandNavy border-t border-cardBorder py-8 mt-16 text-center text-xs text-blue-200">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
+      <p class="font-medium text-white">
+        Politécnico Grancolombiano. Equipo 1. Segundo Semestre 2026.
+      </p>
+      <p>
+        Énfasis Profesional I: Integración Continua | Facultad de Ingeniería, Diseño e Innovación
+      </p>
+      <p class="text-[11px] text-gray-400">
+        Material de uso académico y pedagógico interactivo para el estudio continuo del módulo.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==================== LÓGICA JAVASCRIPT ==================== -->
+  <script>
+    // ---------------------------------------------
+    // MENÚ MÓVIL
+    // ---------------------------------------------
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // ---------------------------------------------
+    // INSPECTOR DE ARQUITECTURA
+    // ---------------------------------------------
+    const architectureNodes = {
+      dev: {
+        title: "💻 Entorno de Desarrollo Local",
+        desc: "Estación de trabajo del desarrollador. Aquí se escribe el código, se ejecutan pruebas unitarias locales y se crean ramas tipo 'feature'. Se sincroniza con GitHub Desktop o terminal mediante commits atómicos y descriptivos."
+      },
+      repo: {
+        title: "📦 Repositorio Central (GitHub VCS)",
+        desc: "Punto neurálgico del control de versiones. Centraliza el historial, administra las ramas (main, develop, feature, hotfix) y emite Webhooks instantáneos a los servidores de CI cada vez que ocurre un evento de Push o Pull Request."
+      },
+      ci: {
+        title: "🔄 Servidor de Integración Continua (Jenkins / Travis)",
+        desc: "El orquestador automatizado. Clona de inmediato la nueva versión, resuelve las dependencias, compila el código, ejecuta suites de pruebas de forma aislada y emite el estado del build (verde/rojo) para garantizar la salud del software."
+      },
+      test: {
+        title: "🧪 Servidor de Pruebas y Análisis (Docker & Codecov)",
+        desc: "Entorno donde se levantan contenedores con réplicas de bases de datos y microservicios para ejecutar pruebas de integración y calcular la cobertura de código antes de autorizar cualquier mezcla (merge) hacia la rama principal."
+      },
+      prod: {
+        title: "🚀 Servidor de Staging / Producción (Sentry Monitoring)",
+        desc: "Host final donde la versión estable se entrega a los usuarios finales. Cuenta con la integración de Sentry para captura proactiva de errores y excepciones en tiempo real, cerrando el ciclo continuo de retroalimentación."
+      }
+    };
+
+    function inspectNode(key) {
+      const data = architectureNodes[key];
+      if (data) {
+        document.getElementById('inspectTitle').innerText = data.title;
+        document.getElementById('inspectDesc').innerText = data.desc;
+      }
+    }
+
+    // ---------------------------------------------
+    // FLASHCARDS DE ESTUDIO
+    // ---------------------------------------------
+    const flashcardsData = [
+      {
+        category: "PRINCIPIOS CI",
+        question: "¿Qué define Martin Fowler como la frecuencia ideal de integración en CI?",
+        answer: "Cada desarrollador debe integrar su trabajo al menos una vez al día en la rama principal, lo que genera múltiples versiones verificadas automáticamente con pruebas."
+      },
+      {
+        category: "HERRAMIENTAS",
+        question: "¿Cuál es el rol principal de Docker en un pipeline de integración continua?",
+        answer: "Empaquetar la aplicación con todas sus dependencias en contenedores ligeros e idénticos, garantizando paridad entre local, pruebas y producción sin sorpresas."
+      },
+      {
+        category: "GESTIÓN ÁGIL",
+        question: "¿Qué ventaja ofrece Zenhub frente a otras herramientas de gestión como Jira o Trello?",
+        answer: "Se integra directamente dentro de GitHub, transformando las incidencias (Issues) y Pull Requests reales en tableros Kanban sin duplicar trabajo ni cambiar de pestaña."
+      },
+      {
+        category: "MONITOREO",
+        question: "¿Por qué es crucial implementar Sentry en el despliegue del software?",
+        answer: "Porque captura fallos, excepciones y caídas en tiempo real con el stack trace exacto, permitiendo detectar y reparar errores antes de que impacten masivamente al cliente."
+      },
+      {
+        category: "ESTRATEGIA GIT",
+        question: "¿Para qué sirve específicamente una rama de tipo 'hotfix'?",
+        answer: "Para corregir fallos críticos e imprevistos directamente sobre el código que ya está en producción, reintegrándose luego a 'master' y 'develop'."
+      }
+    ];
+
+    let currentFcIndex = 0;
+    let isFlipped = false;
+
+    function updateFlashcardUI() {
+      const fc = flashcardsData[currentFcIndex];
+      document.getElementById('fcCategory').innerText = fc.category;
+      document.getElementById('fcCounter').innerText = `${currentFcIndex + 1} / ${flashcardsData.length}`;
+      document.getElementById('fcQuestion').innerText = fc.question;
+      document.getElementById('fcAnswer').innerText = fc.answer;
+
+      const inner = document.getElementById('flashcardInner');
+      isFlipped = false;
+      inner.classList.remove('rotate-y-180');
+    }
+
+    function toggleFlashcard() {
+      const inner = document.getElementById('flashcardInner');
+      isFlipped = !isFlipped;
+      if (isFlipped) {
+        inner.classList.add('rotate-y-180');
+      } else {
+        inner.classList.remove('rotate-y-180');
+      }
+    }
+
+    function nextFlashcard() {
+      currentFcIndex = (currentFcIndex + 1) % flashcardsData.length;
+      updateFlashcardUI();
+    }
+
+    function prevFlashcard() {
+      currentFcIndex = (currentFcIndex - 1 + flashcardsData.length) % flashcardsData.length;
+      updateFlashcardUI();
+    }
+
+    // ---------------------------------------------
+    // QUIZ DE AUTOEVALUACIÓN
+    // ---------------------------------------------
+    const quizData = [
+      {
+        q: "¿Cuál de las siguientes afirmaciones describe mejor el problema que la Integración Continua vino a solucionar?",
+        options: [
+          "La falta de computadores con suficiente memoria para compilar código C++.",
+          "El 'Integration Hell', donde la integración tardía generaba semanas de resolución de conflictos y pruebas manuales caóticas.",
+          "La necesidad de reemplazar por completo a los desarrolladores humanos por bots.",
+          "La ausencia de internet de alta velocidad en las empresas de software."
+        ],
+        correct: 1,
+        explanation: "La integración continua busca resolver los tropiezos de proyectos convencionales: integraciones tardías, lentas, costosas y propensas a errores humanos conocidos como el 'infierno de la integración'."
+      },
+      {
+        q: "En una arquitectura moderna de CI, ¿qué ventaja clave tienen los contenedores Docker sobre las Máquinas Virtuales?",
+        options: [
+          "Requieren un sistema operativo invitado completo para cada aplicación.",
+          "Tardan varios minutos en arrancar cada vez que se ejecutan pruebas.",
+          "Comparten el kernel del anfitrión, son extremadamente livianos y arrancan en milisegundos.",
+          "Solo funcionan en sistemas operativos Windows XP."
+        ],
+        correct: 2,
+        explanation: "A diferencia de las VMs que virtualizan hardware completo con hipervisor y Guest OS, los contenedores Docker comparten el kernel del host, lo que los hace rápidos y ligeros."
+      },
+      {
+        q: "Dentro de GitHub Desktop, ¿qué acción realiza la opción 'initialize this repository with a README'?",
+        options: [
+          "Sube automáticamente el proyecto a la nube de AWS.",
+          "Crea de inmediato un archivo README en la carpeta para documentar el proyecto desde el inicio.",
+          "Borra todos los archivos existentes del disco duro.",
+          "Instala Jenkins en el computador local."
+        ],
+        correct: 1,
+        explanation: "El paso 12 especifica que seleccionar 'initialize this repository with a README' crea automáticamente el archivo README para comenzar a documentar el proyecto."
+      },
+      {
+        q: "¿Qué función cumple Zenhub en la gestión ágil del proyecto de Integración Continua?",
+        options: [
+          "Compilar código Java en la nube.",
+          "Vincular tableros Kanban basados directamente en las Issues y Pull Requests de GitHub.",
+          "Monitorear la temperatura del procesador del servidor.",
+          "Generar certificados SSL para páginas web."
+        ],
+        correct: 1,
+        explanation: "Zenhub es una extensión de productividad que mapea las incidencias y solicitudes de extracción reales de GitHub en flujos Kanban y sprints ágiles."
+      },
+      {
+        q: "¿Por qué se utiliza Sentry en la fase de monitoreo de una aplicación?",
+        options: [
+          "Para comprar dominios de internet.",
+          "Para detectar y rastrear excepciones y fallos en tiempo real con el stack trace en producción.",
+          "Para diseñar la interfaz visual con CSS.",
+          "Para instalar el cliente de Git en Windows."
+        ],
+        correct: 1,
+        explanation: "Sentry es la herramienta predilecta para el monitoreo proactivo de fallos en producción, alertando al instante sobre errores y su causa exacta en el código."
+      }
+    ];
+
+    let currentQIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    function renderQuestion() {
+      answered = false;
+      const q = quizData[currentQIndex];
+      document.getElementById('quizTitle').innerText = `Pregunta ${currentQIndex + 1} de ${quizData.length}`;
+      document.getElementById('quizQuestion').innerText = q.q;
+      
+      const optionsContainer = document.getElementById('quizOptions');
+      optionsContainer.innerHTML = '';
+
+      const feedback = document.getElementById('quizFeedback');
+      feedback.classList.add('hidden');
+      document.getElementById('quizNextBtn').classList.add('hidden');
+
+      q.options.forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left p-3.5 rounded-xl border border-cardBorder bg-brandDark/60 hover:bg-brandNavyLight/40 hover:border-brandCyan text-xs sm:text-sm text-gray-200 transition focus:outline-none";
+        btn.innerText = optText;
+        btn.onclick = () => selectOption(idx);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function selectOption(selectedIdx) {
+      if (answered) return;
+      answered = true;
+
+      const q = quizData[currentQIndex];
+      const optionsButtons = document.getElementById('quizOptions').children;
+      const feedback = document.getElementById('quizFeedback');
+
+      if (selectedIdx === q.correct) {
+        score++;
+        document.getElementById('quizScore').innerText = score;
+        optionsButtons[selectedIdx].classList.remove('bg-brandDark/60', 'border-cardBorder');
+        optionsButtons[selectedIdx].classList.add('bg-emerald-900/60', 'border-emerald-500', 'text-emerald-100');
+        
+        feedback.className = "p-4 rounded-xl text-xs sm:text-sm leading-relaxed border bg-emerald-950/40 border-emerald-500/60 text-emerald-200 block";
+        feedback.innerHTML = `<strong>¡Correcto!</strong> ${q.explanation}`;
+      } else {
+        optionsButtons[selectedIdx].classList.remove('bg-brandDark/60', 'border-cardBorder');
+        optionsButtons[selectedIdx].classList.add('bg-rose-900/60', 'border-rose-500', 'text-rose-100');
+        
+        // Destacar la correcta
+        optionsButtons[q.correct].classList.remove('bg-brandDark/60', 'border-cardBorder');
+        optionsButtons[q.correct].classList.add('bg-emerald-900/50', 'border-emerald-500', 'text-emerald-200');
+
+        feedback.className = "p-4 rounded-xl text-xs sm:text-sm leading-relaxed border bg-rose-950/40 border-rose-500/60 text-rose-200 block";
+        feedback.innerHTML = `<strong>Respuesta incorrecta.</strong> ${q.explanation}`;
+      }
+
+      const nextBtn = document.getElementById('quizNextBtn');
+      if (currentQIndex < quizData.length - 1) {
+        nextBtn.classList.remove('hidden');
+      } else {
+        // Fin del quiz
+        setTimeout(() => {
+          showFinalScore();
+        }, 1500);
+      }
+    }
+
+    function nextQuestion() {
+      if (currentQIndex < quizData.length - 1) {
+        currentQIndex++;
+        renderQuestion();
+      }
+    }
+
+    function showFinalScore() {
+      document.getElementById('quizQuestion').innerText = `¡Has finalizado el Quiz de Autoevaluación!`;
+      document.getElementById('quizOptions').innerHTML = `
+        <div class="text-center py-6 space-y-3 bg-brandDark/40 rounded-xl border border-cardBorder">
+          <div class="text-4xl">🎯</div>
+          <div class="text-xl font-bold text-white">Tu Calificación Final: ${score} / ${quizData.length}</div>
+          <p class="text-xs sm:text-sm text-blue-200">
+            ${score >= 4 ? '¡Excelente dominio conceptual del módulo de Integración Continua!' : 'Buen intento. Te recomendamos repasar los temas de arquitectura y herramientas.'}
+          </p>
+        </div>
+      `;
+      document.getElementById('quizNextBtn').classList.add('hidden');
+      document.getElementById('quizRestartBtn').classList.remove('hidden');
+    }
+
+    function restartQuiz() {
+      currentQIndex = 0;
+      score = 0;
+      document.getElementById('quizScore').innerText = 0;
+      document.getElementById('quizRestartBtn').classList.add('hidden');
+      renderQuestion();
+    }
+
+    // Inicialización al cargar la ventana
+    window.onload = function() {
+      updateFlashcardUI();
+      renderQuestion();
+      inspectNode('ci');
+    };
+  </script>
+</body>
+</html>
